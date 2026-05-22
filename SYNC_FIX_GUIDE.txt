@@ -1,0 +1,74 @@
+=====================================================================
+  STUDENTNEST – GRADLE SYNC FIX GUIDE
+  For school lab / corporate proxy environments
+=====================================================================
+
+STEP 1 — Configure proxy in Android Studio
+───────────────────────────────────────────
+1. Open Android Studio
+2. Go to:  File → Settings → Appearance & Behavior
+              → System Settings → HTTP Proxy
+3. Select "Manual proxy configuration"
+4. Ask your lab technician / IT for:
+      Proxy host  (e.g.  proxy.bac.bw  or  192.168.1.1)
+      Proxy port  (usually 8080 or 3128)
+5. Enter those values and click "Check connection"
+6. Click OK
+
+── OR ── (if you know the proxy already)
+
+Edit the file:  StudentNest/gradle.properties
+Uncomment and fill in these lines:
+
+    systemProp.http.proxyHost=YOUR_PROXY_HOST
+    systemProp.http.proxyPort=YOUR_PROXY_PORT
+    systemProp.https.proxyHost=YOUR_PROXY_HOST
+    systemProp.https.proxyPort=YOUR_PROXY_PORT
+
+
+STEP 2 — Invalidate caches then sync
+──────────────────────────────────────
+1. File → Invalidate Caches → Invalidate and Restart
+2. After restart: File → Sync Project with Gradle Files
+
+
+STEP 3 — If sync STILL fails (offline / no proxy access)
+──────────────────────────────────────────────────────────
+Use a phone hotspot or home internet for the FIRST sync only.
+Once Gradle downloads the dependencies they are cached locally
+at:  C:\Users\YOU\.gradle\caches\
+After that the project works offline forever.
+
+
+STEP 4 — Verify these are installed in SDK Manager
+────────────────────────────────────────────────────
+Tools → SDK Manager → check these are installed:
+  ✓ Android SDK Platform 33  (or 26+)
+  ✓ Android SDK Build-Tools  33.0.0  (or 30.0.3)
+  ✓ Android SDK Command-line Tools
+  ✓ Google Play Services
+
+
+STEP 5 — Check your Java version
+──────────────────────────────────
+File → Project Structure → SDK Location
+→ JDK Location should point to JDK 11 or 17
+   (NOT JDK 8 — kapt requires 11+)
+
+To change it: File → Settings → Build, Execution, Deployment
+              → Build Tools → Gradle → Gradle JDK → select 11 or 17
+
+
+QUICK CHECKLIST
+───────────────
+[ ] Proxy configured (Step 1)
+[ ] SDK Platform 33 installed (Step 4)
+[ ] Build-Tools 33.0.0 installed (Step 4)
+[ ] JDK set to 11 or 17 (Step 5)
+[ ] Clicked "Sync Project with Gradle Files"
+
+=====================================================================
+  DEMO LOGIN (once app runs)
+  Email:    thabo.molefe@studentnest.com
+  Password: student123
+=====================================================================
